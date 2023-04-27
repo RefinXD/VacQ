@@ -1,5 +1,5 @@
 const Hospital = require("../models/Hospital.js");
-const vacCenter = require("../models/VacCenter.js");
+// const vacCenter = require("../models/VacCenter.js");
 
 //@desc Get all hospitals
 //@route  GET /api/v1/hospitals
@@ -12,10 +12,11 @@ exports.getHospitals = async (req,res,next) => {
 
     //Fields to exclude
     const removeFields=['select','sort','page','limit'];
-    
+    console.log(reqQuery)
+    console.log(1)
     //Loop over request query
     removeFields.forEach(param=> delete reqQuery[param])
-    console.log(reqQuery)
+    //console.log(reqQuery)
 
     let queryStr=JSON.stringify(reqQuery);
     queryStr=queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match=> `$${match}`); 
@@ -131,16 +132,16 @@ exports.deleteHospital = async (req,res,next) =>{
     }
 }
 
-//@desc Get all hospitals
-//@route  GET /api/v1/hospitals
-//@access Public
-exports.getVacCenters = async (req,res,next) => {
-    vacCenter.getAll((err,data) => {
-        if(err)
-        res.status(500).send({
-            message:
-              err.message || "Some error occured while retriving V accine Centers."
-        });
-        else res.send(data);
-    });
-};
+// //@desc Get all hospitals
+// //@route  GET /api/v1/hospitals
+// //@access Public
+// exports.getVacCenters = async (req,res,next) => {
+//     vacCenter.getAll((err,data) => {
+//         if(err)
+//         res.status(500).send({
+//             message:
+//               err.message || "Some error occured while retriving V accine Centers."
+//         });
+//         else res.send(data);
+//     });
+// };
